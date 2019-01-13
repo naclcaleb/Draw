@@ -44,6 +44,6 @@ var COLOR = {
 
 var canvas = new Canvas(800,600);
 
-setInterval(function(){
+document.body.addEventListener("mousemove", function(){
     canvas.draw();
-}, 60 / 1000);
+});
