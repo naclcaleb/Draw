@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Photoshop</title>
+        <meta charset='utf-8'>
+        <script src="jscolor.js"></script>
+        <style>
+            canvas {
+                background:white;
+                box-shadow: 5px 5px 10px gray;
+            }
+
+            canvas:hover {
+                cursor: pointer;
+            }
+
+            #controls {
+                float: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="viewport">
+
+        </div>
+        <div id="controls">
+            <label for="brushSize">Brush Size</label><br>
+            <input type="range" id="brushSize" value=10 max="1000">
+            <br><br>
+            <label for="brush">Brush Type</label><br>
+            <select id="brush">
+                <option value="default">Default</option>
+                <option value="netted">Netted</option>
+                <option value="calligraphy">Calligraphy</option>
+                <option value="bubbles">Bubbles</option>
+                <option value="sketchy">Sketchy</option>
+            </select><br><br>
+            <label for="colorpicker">Color: </label><br>
+            <input class="jscolor {onFineChange:'update(this)'}" value="ff0000"><br><br>
+            <label for="opacity">Opacity: </label><br>
+            <input type="range" id="opacity" min="0" max="100">
+
+        </div>
+        
+        <script src="CTX_MODS.js"></script>
+        <script src="Colors.js"></script>
+        <script src="./Stroke.js"></script>
+        <script src="./Brush.js"></script>
+        <script src="ImageBrush.js"></script>
+        <script src="brushes.js"></script>
+        <script src="./Layer.js"></script>
+        <script src="./Canvas.js"></script>
+        <script src="./index.js"></script>
+        <script>
+        </script>
+    </body>
+</html>
