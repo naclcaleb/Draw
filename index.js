@@ -1,7 +1,3 @@
-document.getElementById("brushSize").addEventListener("change", function(e){
-    BRUSH_SIZE = document.getElementById("brushSize").value;
-});
-
 var type = document.getElementById("brush");
 
 var BRUSHES = {
@@ -12,11 +8,20 @@ var BRUSHES = {
     "calligraphy": CALLIGRAPHY_BRUSH
 };
 
+//Some event listeners
 type.addEventListener("change", function(e){
     
     CURRENT_TOOL = BRUSHES[type.value];
     
 });
+
+document.getElementById("brushSize").addEventListener("change", function(e){
+    BRUSH_SIZE = document.getElementById("brushSize").value;
+});
+
+
+
+
 var colorPicker = document.querySelector(".jscolor");
 
 function update(picker){
@@ -32,7 +37,7 @@ var o = document.getElementById("opacity");
 o.addEventListener("change", function(){
      COLOR.alpha = o.value/100;
 });
-
+//Globals
 var CURRENT_TOOL = DEFAULT_BRUSH;
 var BRUSH_SIZE = 10;
 var COLOR = {
@@ -41,6 +46,8 @@ var COLOR = {
     blue: 0,
     alpha: 0.3
 };
+
+var ACTIVE_LAYER = 0;
 
 var canvas = new Canvas(800,600);
 

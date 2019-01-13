@@ -20,7 +20,7 @@ class Canvas {
 
     draw(){
         
-        for (var i = 0;i<this.layers.length;i++){
+        for (var i = ACTIVE_LAYER;i<this.layers.length;i++){
             this.layers[i].ctx.clearRect(0,0,this.width, this.height);
             for (var j = 0;j<this.layers[i].strokes.length;j++){
                 this.layers[i].strokes[j].draw();
