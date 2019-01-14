@@ -176,7 +176,7 @@ var BUBBLES = new Brush(function(ctx, e){
         });
         actions.push({
             func: ctx.arc,
-            params: [e.clientX, e.clientY, radius, 
+            params: [x, y, radius, 
             false, Math.PI * 2, false]
         });
         actions.push({
