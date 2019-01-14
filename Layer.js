@@ -10,8 +10,10 @@ class Layer {
         this.el.style.background = "rgb(0,0,0,0)";
         this.el.width = width;
         this.el.height = height;
+        this.erasing = false;
         this.strokes = [];
         this.undone = [];
+        
         
         this.ctx = this.el.getContext("2d");
 
@@ -47,12 +49,17 @@ class Layer {
     }
 
     createRender(){
+        this.ctx.globalCompositeOperation = "source-over";
         this.ctx.clearRect(0, 0, this.el.width, this.el.height);
         for (var i = 0;i<this.strokes.length;i++){
             this.strokes[i].draw();
         }
 
         this.render = this.ctx.getImageData(0,0, this.el.width, this.el.height);
+
+        if (this.erasing){
+            this.eraserOn();
+        }
     }
 
     updateRender(stroke){
@@ -71,5 +78,14 @@ class Layer {
     draw(){
         this.ctx.clearRect(0, 0, this.el.width, this.el.height);
         this.ctx.putImageData(this.render, 0, 0);
+    }
+
+    eraserOn(){
+        this.ctx.globalCompositeOperation = "destination-out";
+        this.erasing = true;
+    }
+    eraserOff(){
+        this.ctx.globalCompositeOperation = "source-over";
+        this.erasing = false;
     }
 }
