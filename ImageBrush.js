@@ -4,7 +4,7 @@ class ImageBrush {
         this.currentStroke;
         this.on = false;
         this.img = img;
-        this.img.crossOrigin = 'Anonymous';
+        //this.img.crossOrigin = 'Anonymous';
     }
 
     prepareContext(ctx){
