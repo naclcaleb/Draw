@@ -11,12 +11,15 @@ class Layer {
         this.el.width = width;
         this.el.height = height;
         this.strokes = [];
+        this.undone = [];
         
         this.ctx = this.el.getContext("2d");
 
         var ctx = this.ctx;
         var active = this.active;
         var that = this;
+
+        this.createRender();
 
         this.el.addEventListener("mousedown", function(e){
             if (active){
@@ -26,7 +29,11 @@ class Layer {
 
         this.el.addEventListener("mouseup", function(e){
             if (active){
-                that.strokes.push( CURRENT_TOOL.endStroke(ctx) );
+                var newStroke = CURRENT_TOOL.endStroke(ctx);
+
+                that.strokes.push(newStroke);
+                //Update the render
+                that.updateRender(newStroke);
             }
         });
 
@@ -37,5 +44,32 @@ class Layer {
         });
 
 
+    }
+
+    createRender(){
+        this.ctx.clearRect(0, 0, this.el.width, this.el.height);
+        for (var i = 0;i<this.strokes.length;i++){
+            this.strokes[i].draw();
+        }
+
+        this.render = this.ctx.getImageData(0,0, this.el.width, this.el.height);
+    }
+
+    updateRender(stroke){
+        this.ctx.putImageData(this.render, 0, 0);
+        stroke.draw();
+
+        this.render = this.ctx.getImageData(0,0, this.el.width, this.el.height);
+    }
+
+    undo(){
+        var stroke = this.strokes.pop();
+        this.undone.unshift(stroke);
+        this.createRender();
+    }
+
+    draw(){
+        this.ctx.clearRect(0, 0, this.el.width, this.el.height);
+        this.ctx.putImageData(this.render, 0, 0);
     }
 }

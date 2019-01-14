@@ -4,27 +4,33 @@ class Canvas {
         this.width = width;
         this.height = height;
         this.layers = [new Layer(width, height)];
-        this.activeLayer = 0;
+        this.activeLayer = ACTIVE_LAYER || 0;
 
         this.el = document.createElement("div");
         this.el.id = "canvas";
         this.el.style.boxShadow = "gray 5px 5px 10px";
         
         document.getElementById("viewport").appendChild(this.el);
-
+        var that = this;
         //Append layers
         for (var i = 0;i<this.layers.length;i++){
             this.el.appendChild(this.layers[i].el);
         }
+
+        document.addEventListener("keydown", function(e){
+            if (e.key === "z" && e.ctrlKey){
+                that.layers[that.activeLayer].undo();
+                that.draw();
+            }
+        });
     }
+
+
 
     draw(){
         
-        for (var i = ACTIVE_LAYER;i<this.layers.length;i++){
-            this.layers[i].ctx.clearRect(0,0,this.width, this.height);
-            for (var j = 0;j<this.layers[i].strokes.length;j++){
-                this.layers[i].strokes[j].draw();
-            }
+        for (var i = this.activeLayer;i<this.layers.length;i++){
+            this.layers[i].draw();
         }
         if (CURRENT_TOOL.on){
             CURRENT_TOOL.currentStroke.draw();
