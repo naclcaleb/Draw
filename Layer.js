@@ -52,7 +52,7 @@ class Layer {
             var E = {
                 clientX: e.clientX - CANVAS_LEFT,
                 clientY: e.clientY - CANVAS_TOP
-            }
+            };
             if (active){
                 CURRENT_TOOL.continueStroke(ctx, E);
             }

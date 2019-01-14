@@ -63,11 +63,15 @@ document.body.addEventListener("mousemove", function(){
 
 var CANVAS_LEFT = 0;
 var CANVAS_TOP = 0;
+CANVAS_LEFT = parseFloat(canvas.el.style.left.replace("px", ""));
+CANVAS_TOP = parseFloat(canvas.el.style.top.replace("px",""));
+
+canvas.zoom(1);
 
 document.body.addEventListener("wheel", function(e){
     CANVAS_LEFT = parseFloat(canvas.el.style.left.replace("px", ""));
     CANVAS_TOP = parseFloat(canvas.el.style.top.replace("px",""));
-    console.log(canvas.el.style.top);
+    
     e.preventDefault();
     canvas.zoom(e.deltaY);
     

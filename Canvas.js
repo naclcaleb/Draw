@@ -10,7 +10,7 @@ class Canvas {
         this.el.id = "canvas";
         this.el.style.boxShadow = "gray 5px 5px 10px";
         this.el.style.left = (window.innerWidth - this.width)/2 + "px";
-        this.el.style.left = (window.innerHeight - this.height)/2 + "px";
+        this.el.style.top = (window.innerHeight - this.height)/2 + "px";
          
         document.getElementById("viewport").appendChild(this.el);
         var that = this;
