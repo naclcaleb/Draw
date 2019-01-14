@@ -61,10 +61,14 @@ document.body.addEventListener("mousemove", function(){
     canvas.draw();
 });
 
-function sigmoid(t) {
-    return 1/(1+Math.pow(Math.E, -t));
-}
-console.log("H")
+var CANVAS_LEFT = 0;
+var CANVAS_TOP = 0;
+
 document.body.addEventListener("wheel", function(e){
-    console.log(sigmoid(e.deltaY));
+    CANVAS_LEFT = parseFloat(canvas.el.style.left.replace("px", ""));
+    CANVAS_TOP = parseFloat(canvas.el.style.top.replace("px",""));
+    console.log(canvas.el.style.top);
+    e.preventDefault();
+    canvas.zoom(e.deltaY);
+    
 });

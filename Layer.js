@@ -2,17 +2,19 @@ class Layer {
     constructor( width, height ){
         this.active = true;
         this.el = document.createElement("canvas");
-        this.el.style.position = "absolute";
+        //this.el.style.position = "relative";
         this.el.style.left = "10px;"
         this.el.style.top = "10px";
-        this.el.style.width = width + "px";
-        this.el.style.height = height + "px";
+        this.el.style.width = "100%";
+        this.el.style.height = "100%";
+
         this.el.style.background = "rgb(0,0,0,0)";
         this.el.width = width;
         this.el.height = height;
         this.erasing = false;
         this.strokes = [];
         this.undone = [];
+        
         
         
         this.ctx = this.el.getContext("2d");
@@ -45,10 +47,11 @@ class Layer {
         });
 
         this.el.addEventListener("mousemove", function(e){
-            var rect = that.el.getBoundingClientRect();
+            console.log("Top: " + (e.clientY - CANVAS_TOP));
+
             var E = {
-                clientX: e.clientX - rect.left,
-                clientY: e.clientY - rect.top
+                clientX: e.clientX - CANVAS_LEFT,
+                clientY: e.clientY - CANVAS_TOP
             }
             if (active){
                 CURRENT_TOOL.continueStroke(ctx, E);
