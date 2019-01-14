@@ -24,8 +24,13 @@ class Layer {
         this.createRender();
 
         this.el.addEventListener("mousedown", function(e){
+            var rect = that.el.getBoundingClientRect();
+            var E = {
+                clientX: e.clientX - rect.left,
+                clientY: e.clientY - rect.top
+            }
             if (active){
-                CURRENT_TOOL.startStroke(ctx, e);
+                CURRENT_TOOL.startStroke(ctx, E);
             }
         });
 
@@ -40,8 +45,13 @@ class Layer {
         });
 
         this.el.addEventListener("mousemove", function(e){
+            var rect = that.el.getBoundingClientRect();
+            var E = {
+                clientX: e.clientX - rect.left,
+                clientY: e.clientY - rect.top
+            }
             if (active){
-                CURRENT_TOOL.continueStroke(ctx, e);
+                CURRENT_TOOL.continueStroke(ctx, E);
             }
         });
 
