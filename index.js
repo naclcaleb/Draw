@@ -60,3 +60,11 @@ var canvas = new Canvas(800,600);
 document.body.addEventListener("mousemove", function(){
     canvas.draw();
 });
+
+function sigmoid(t) {
+    return 1/(1+Math.pow(Math.E, -t));
+}
+console.log("H")
+document.body.addEventListener("wheel", function(e){
+    console.log(sigmoid(e.deltaY));
+});
