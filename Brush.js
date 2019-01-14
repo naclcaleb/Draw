@@ -28,6 +28,17 @@ class Brush {
         ctx.setGlobalAlpha = function(alpha){
             ctx.globalAlpha = alpha;
         }
+        ctx.setGlobalCompositeOperation = function(operation){
+            ctx.globalCompositeOperation = 'destination-out';
+        }
+
+        ctx.setLineCap = function(style){
+            ctx.lineCap = style;
+        }
+
+        ctx.setLineJoin = function(style){
+            ctx.lineJoin = style;
+        }
         
         ctx.lineCap = "round";
         ctx.lineJoin = "round";

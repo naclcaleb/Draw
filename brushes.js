@@ -188,13 +188,12 @@ var BUBBLES = new Brush(function(ctx, e){
             params: [1]
         })
         
-
     //}
 
     this.currentStroke.addActions(actions);
 });
 
 var callig_instance_img = new Image();
-callig_instance_img.src = "http://www.tricedesigns.com/wp-content/uploads/2012/01/brush2.png";
+callig_instance_img.src = "calligraphy.png";
 var CALLIGRAPHY_BRUSH = new ImageBrush(callig_instance_img);
 

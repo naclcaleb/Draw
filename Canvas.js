@@ -36,4 +36,16 @@ class Canvas {
             CURRENT_TOOL.currentStroke.draw();
         }
     }
+
+    eraserOn(){
+        for (var i = 0;i<this.layers.length;i++){
+            this.layers[i].eraserOn();
+        }
+    }
+
+    eraserOff(){
+        for (var i = 0;i<this.layers.length;i++){
+            this.layers[i].eraserOff();
+        }
+    }
 }

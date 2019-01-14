@@ -19,7 +19,13 @@ document.getElementById("brushSize").addEventListener("change", function(e){
     BRUSH_SIZE = document.getElementById("brushSize").value;
 });
 
-
+function eraserToggle(cb){
+    if (cb.checked) {
+        canvas.eraserOn();
+    }else {
+        canvas.eraserOff();
+    }
+}
 
 
 var colorPicker = document.querySelector(".jscolor");

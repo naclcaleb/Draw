@@ -4,15 +4,36 @@ class ImageBrush {
         this.currentStroke;
         this.on = false;
         this.img = img;
+        this.img.crossOrigin = 'Anonymous';
     }
 
     prepareContext(ctx){
         ctx.setFillStyle = function(style){
             ctx.fillStyle = style;
         }
+        ctx.setStrokeStyle = function(style){
+            ctx.strokeStyle = style;
+        }
+        ctx.setLineWidth = function(width){
+            ctx.lineWidth = width;
+        }
+        ctx.setGlobalAlpha = function(alpha){
+            ctx.globalAlpha = alpha;
+        }
+        ctx.setGlobalCompositeOperation = function(operation){
+            ctx.globalCompositeOperation = 'destination-out';
+        }
 
-        ctx.setLineCap("round");
-        ctx.setLineJoin("round");
+        ctx.setLineCap = function(style){
+            ctx.lineCap = style;
+        }
+
+        ctx.setLineJoin = function(style){
+            ctx.lineJoin = style;
+        }
+        
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
     }
 
     startStroke(ctx, e){
