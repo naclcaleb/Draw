@@ -1,3 +1,13 @@
+function  getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect(), // abs. size of element
+        scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for X
+        scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for Y
+  
+    return {
+      clientX: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
+      clientY: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+    }
+}
 class Layer {
     constructor( width, height ){
         this.active = true;
@@ -27,10 +37,7 @@ class Layer {
 
         this.el.addEventListener("mousedown", function(e){
             var rect = that.el.getBoundingClientRect();
-            var E = {
-                clientX: e.clientX - rect.left,
-                clientY: e.clientY - rect.top
-            }
+            var E = getMousePos(that.el, e);
             if (active){
                 CURRENT_TOOL.startStroke(ctx, E);
             }
@@ -47,12 +54,9 @@ class Layer {
         });
 
         this.el.addEventListener("mousemove", function(e){
-            console.log("Top: " + (e.clientY - CANVAS_TOP));
+            console.log("X: " + (e.clientX - CANVAS_LEFT) * (CANVAS_WIDTH / that.el.width) + ", Y: " + (e.clientY - CANVAS_TOP) * (CANVAS_HEIGHT / that.el.height));
 
-            var E = {
-                clientX: e.clientX - CANVAS_LEFT,
-                clientY: e.clientY - CANVAS_TOP
-            };
+            var E = getMousePos(that.el, e);
             if (active){
                 CURRENT_TOOL.continueStroke(ctx, E);
             }

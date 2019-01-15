@@ -65,6 +65,8 @@ var CANVAS_LEFT = 0;
 var CANVAS_TOP = 0;
 CANVAS_LEFT = parseFloat(canvas.el.style.left.replace("px", ""));
 CANVAS_TOP = parseFloat(canvas.el.style.top.replace("px",""));
+CANVAS_WIDTH = parseFloat(canvas.el.style.width.replace("px", ""));
+CANVAS_HEIGHT = parseFloat(canvas.el.style.height.replace("px", ""));
 
 canvas.zoom(1);
 
