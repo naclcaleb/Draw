@@ -3,10 +3,17 @@
     <head>
         <title>Photoshop</title>
         <meta charset='utf-8'>
-        <script src="jscolor.js"></script>
+        <script src="iro.min.js"></script>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="./mdl-selectfield.min.css">
+        <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <script rel="stylesheet" src="./mdl-selectfield.min.js"></script>
         <style>
             body {
-                background: rgb(240,240,240);
+                background: rgb(230,230,230);
+                font-family: sans-serif;
             }
 
             canvas {
@@ -24,7 +31,19 @@
             }
 
             #controls {
-                float: right;
+                position: absolute;
+                left: 10px;
+                top: 10%;
+                background: white;
+                color: rgb(10, 10, 10);
+                padding: 1em;
+                border-radius: 10px;
+                box-shadow: gray 3px 3px 10px;
+                z-index: 1000000;
+            }
+
+            #savedImage {
+                position: relative;
             }
         </style>
     </head>
@@ -34,27 +53,44 @@
         </div>
         <div id="controls">
             <label for="brushSize">Brush Size</label><br>
-            <input type="range" id="brushSize" value=10 max="1000">
+            <input class="mdl-slider mdl-js-slider" type="range" id="brushSize" value=10 max="1000">
             <br><br>
-            <label for="erasing">Eraser: </label>
-            <input type="checkbox" id="erasing" onClick="eraserToggle(this)"><br><br>
-            <label for="brush">Brush Type</label><br>
-            <select id="brush">
-                <option value="default">Default</option>
-                <option value="netted">Netted</option>
-                <option value="calligraphy">Calligraphy</option>
-                <option value="bubbles">Bubbles</option>
-                <option value="sketchy">Sketchy</option>
-            </select><br><br>
-            <label for="colorpicker">Color: </label><br>
-            <input class="jscolor {onFineChange:'update(this)'}" value="ff0000"><br><br>
-            <label for="opacity">Opacity: </label><br>
-            <input type="range" id="opacity" min="0" max="100"><br><br>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="eraser">
+                    <input type="checkbox" id="eraser" class="mdl-checkbox__input" onClick="eraserToggle(this)">
+                    <span class="mdl-checkbox__label">Eraser</span>
+            </label>
 
-            <button id="save">Save Drawing</button>
+            <br><br>
+
+            <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+                <select id="brush" class="mdl-selectfield__select">
+                    <option value="default">Default</option>
+                    <option value="netted">Netted</option>
+                    <option value="calligraphy">Calligraphy</option>
+                    <option value="bubbles">Bubbles</option>
+                    <option value="sketchy">Sketchy</option>
+                </select>
+                <label class="mdl-selectfield__label" for="brush">Brush Type</label>
+            </div><br><br>
+
+            <label for="colorpicker">Color</label><br>
+            <div id="color-picker"></div><br><br>
+
+            <label for="opacity">Opacity</label><br>
+            <input class="mdl-slider mdl-js-slider" type="range" id="opacity" min="0" max="100"><br><br>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <label class="mdl-textfield__label">File Name: </label>
+                <input class="mdl-textfield__input" type="text" id="filename" value="Untitled">
+            </div>
+            <br><br>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="save">Save Drawing</button>
 
         </div>
+
+        <div id="savedImage"></div>
         
+        <script src="https://code.jquery.com/jquery.min.js"></script>
         <script src="Colors.js"></script>
         <script src="./Stroke.js"></script>
         <script src="./Brush.js"></script>

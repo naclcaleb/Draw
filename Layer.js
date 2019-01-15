@@ -40,11 +40,26 @@ class Layer {
             var E = getMousePos(that.el, e);
             if (active){
                 CURRENT_TOOL.startStroke(ctx, E);
+
+                if (that.erasing){
+                    CURRENT_TOOL.currentStroke.actions.unshift({
+                        func: ctx.setGlobalCompositeOperation,
+                        params: ["destination-out"]
+                    });
+                }
             }
         });
 
         this.el.addEventListener("mouseup", function(e){
             if (active){
+
+                if (that.erasing){
+                    CURRENT_TOOL.currentStroke.actions.push({
+                        func: ctx.setGlobalCompositeOperation,
+                        params: ["source-over"]
+                    });
+                }
+
                 var newStroke = CURRENT_TOOL.endStroke(ctx);
 
                 that.strokes.push(newStroke);

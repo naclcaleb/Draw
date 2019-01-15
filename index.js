@@ -8,6 +8,8 @@ var BRUSHES = {
     "calligraphy": CALLIGRAPHY_BRUSH
 };
 
+var FILENAME = document.getElementById("filename").value;
+
 //Some event listeners
 type.addEventListener("change", function(e){
     
@@ -28,16 +30,19 @@ function eraserToggle(cb){
 }
 
 
-var colorPicker = document.querySelector(".jscolor");
+var colorPicker = new iro.ColorPicker("#color-picker", {
+    width: 220, 
+    height: 220,
+    color: "#f00"
+});
 
-function update(picker){
-    COLOR = {
-        red: picker.rgb[0],
-        green: picker.rgb[1],
-        blue: picker.rgb[2],
-        alpha: COLOR.alpha
-    }
-}
+colorPicker.on("color:change", function(color){
+    COLOR.red = color.rgb.r;
+    COLOR.green = color.rgb.g;
+    COLOR.blue = color.rgb.b;
+});
+
+
 
 var o = document.getElementById("opacity");
 o.addEventListener("change", function(){
@@ -63,15 +68,16 @@ document.body.addEventListener("mousemove", function(){
 
 var CANVAS_LEFT = 0;
 var CANVAS_TOP = 0;
+
+
+
 CANVAS_LEFT = parseFloat(canvas.el.style.left.replace("px", ""));
 CANVAS_TOP = parseFloat(canvas.el.style.top.replace("px",""));
-CANVAS_WIDTH = parseFloat(canvas.el.style.width.replace("px", ""));
-CANVAS_HEIGHT = parseFloat(canvas.el.style.height.replace("px", ""));
+
 
 canvas.zoom(1);
 
 document.getElementById("save").onclick = function(){
-    console.log("Hi");
     canvas.save();
 };
 
@@ -83,3 +89,4 @@ document.body.addEventListener("wheel", function(e){
     canvas.zoom(e.deltaY);
     
 });
+
