@@ -72,4 +72,22 @@ class Canvas {
             this.layers[i].eraserOff();
         }
     }
+
+    save(){
+        //Create a new canvas
+        var newCanvas = document.createElement("canvas");
+        newCanvas.style.display = "none";
+
+        var context = newCanvas.getContext("2d");
+
+        document.body.appendChild(newCanvas);
+
+        //Get all the renderings and write them to the canvas
+        for (var i = 0;i<this.layers.length;i++){
+            //I'm going to render it again just in case
+            this.layers[i].createRender();
+            
+           context.putImageData(this.layers[i].render);
+        }
+    }
 }

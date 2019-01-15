@@ -70,6 +70,11 @@ CANVAS_HEIGHT = parseFloat(canvas.el.style.height.replace("px", ""));
 
 canvas.zoom(1);
 
+document.getElementById("save").onclick = function(){
+    console.log("Hi");
+    canvas.save();
+};
+
 document.body.addEventListener("wheel", function(e){
     CANVAS_LEFT = parseFloat(canvas.el.style.left.replace("px", ""));
     CANVAS_TOP = parseFloat(canvas.el.style.top.replace("px",""));

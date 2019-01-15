@@ -54,8 +54,6 @@ class Layer {
         });
 
         this.el.addEventListener("mousemove", function(e){
-            console.log("X: " + (e.clientX - CANVAS_LEFT) * (CANVAS_WIDTH / that.el.width) + ", Y: " + (e.clientY - CANVAS_TOP) * (CANVAS_HEIGHT / that.el.height));
-
             var E = getMousePos(that.el, e);
             if (active){
                 CURRENT_TOOL.continueStroke(ctx, E);
