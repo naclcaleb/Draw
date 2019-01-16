@@ -14,7 +14,6 @@ class Stroke {
         this.actions = [];
         this.ctx = context;
         this.render = undefined;
-        this.renderOn = false;
     }
 
     addAction(action){
@@ -68,17 +67,16 @@ class Stroke {
 
         this.render = canvas.toDataURL("image/png");
 
-        
     }
 
     draw(){
-        if (!this.render){
+        if (this.render === undefined){
             for (var i = 0;i<this.actions.length;i++){
                 this.actions[i].func.apply(this.ctx, this.actions[i].params);
             }
         }
         else {
-            
+            console.log("Render")
             
             let render = new Image();
 
@@ -86,8 +84,6 @@ class Stroke {
             
             //Draw the render
             this.ctx.drawImage(render, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-           
-            
         }
     }
 }

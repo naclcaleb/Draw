@@ -89,7 +89,7 @@ class Layer {
             this.strokes[i].draw();
         }
 
-        this.render = this.ctx.getImageData(0,0, this.el.width, this.el.height);
+        this.render = this.el.toDataURL();
 
         if (this.erasing){
             this.eraserOn();
@@ -97,21 +97,27 @@ class Layer {
     }
 
     updateRender(stroke){
-        this.ctx.putImageData(this.render, 0, 0);
-        stroke.draw();
+        var newImage = new Image();
+        newImage.src = this.render;
+        this.ctx.drawImage(newImage, 0, 0);
+        this.strokes[this.strokes.length-1].draw();
 
-        this.render = this.ctx.getImageData(0,0, this.el.width, this.el.height);
+        this.render = this.el.toDataURL();
     }
 
     undo(){
         var stroke = this.strokes.pop();
         this.undone.unshift(stroke);
         this.createRender();
+        
     }
 
     draw(){
         this.ctx.clearRect(0, 0, this.el.width, this.el.height);
-        this.ctx.putImageData(this.render, 0, 0);
+
+        var newImage = new Image();
+        newImage.src = this.render;
+        this.ctx.drawImage(newImage, 0, 0);
     }
 
     eraserOn(){
