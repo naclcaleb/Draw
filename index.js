@@ -60,7 +60,10 @@ var COLOR = {
 
 var ACTIVE_LAYER = 0;
 
-var canvas = new Canvas(800,600);
+var CANVAS_WIDTH = 800;
+var CANVAS_HEIGHT = 600;
+
+var canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 document.body.addEventListener("mousemove", function(){
     canvas.draw();

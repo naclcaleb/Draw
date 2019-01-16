@@ -17,27 +17,27 @@ class Brush {
 
     prepareContext(ctx){
         ctx.setFillStyle = function(style){
-            ctx.fillStyle = style;
+            this.fillStyle = style;
         }
         ctx.setStrokeStyle = function(style){
-            ctx.strokeStyle = style;
+            this.strokeStyle = style;
         }
         ctx.setLineWidth = function(width){
-            ctx.lineWidth = width;
+            this.lineWidth = width;
         }
         ctx.setGlobalAlpha = function(alpha){
-            ctx.globalAlpha = alpha;
+            this.globalAlpha = alpha;
         }
         ctx.setGlobalCompositeOperation = function(operation){
-            ctx.globalCompositeOperation = 'destination-out';
+            this.globalCompositeOperation = 'destination-out';
         }
 
         ctx.setLineCap = function(style){
-            ctx.lineCap = style;
+            this.lineCap = style;
         }
 
         ctx.setLineJoin = function(style){
-            ctx.lineJoin = style;
+            this.lineJoin = style;
         }
         
         ctx.lineCap = "round";

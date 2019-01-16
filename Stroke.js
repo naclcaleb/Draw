@@ -1,3 +1,7 @@
+
+    
+   
+
 class Stroke {
     constructor(context){
         /*
@@ -9,6 +13,8 @@ class Stroke {
         */
         this.actions = [];
         this.ctx = context;
+        this.render = undefined;
+        this.renderOn = false;
     }
 
     addAction(action){
@@ -21,9 +27,65 @@ class Stroke {
         }
     }
 
-    draw(){
+    createRender(){
+        var canvas = document.createElement("canvas");
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
+        var ctx = canvas.getContext("2d");
+
+        ctx.setFillStyle = function(style){
+            this.fillStyle = style;
+        }
+        ctx.setStrokeStyle = function(style){
+            this.strokeStyle = style;
+        }
+        ctx.setLineWidth = function(width){
+            this.lineWidth = width;
+        }
+        ctx.setGlobalAlpha = function(alpha){
+            this.globalAlpha = alpha;
+        }
+        ctx.setGlobalCompositeOperation = function(operation){
+            this.globalCompositeOperation = 'destination-out';
+        }
+    
+        ctx.setLineCap = function(style){
+            this.lineCap = style;
+        }
+    
+        ctx.setLineJoin = function(style){
+            this.lineJoin = style;
+        }
+        
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (var i = 0;i<this.actions.length;i++){
-            this.actions[i].func.apply(this.ctx, this.actions[i].params);
+            this.actions[i].func.apply(ctx, this.actions[i].params);
+        }
+
+        this.render = canvas.toDataURL("image/png");
+
+        
+    }
+
+    draw(){
+        if (!this.render){
+            for (var i = 0;i<this.actions.length;i++){
+                this.actions[i].func.apply(this.ctx, this.actions[i].params);
+            }
+        }
+        else {
+            
+            
+            let render = new Image();
+
+            render.src = this.render;
+            
+            this.ctx.drawImage(render, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+           
         }
     }
 }
