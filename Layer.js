@@ -60,11 +60,11 @@ class Layer {
                     });
                 }
 
-
+                CURRENT_TOOL.currentStroke.createRender();
 
                 var newStroke = CURRENT_TOOL.endStroke(ctx);
 
-                newStroke.createRender();
+                
 
                 that.strokes.push(newStroke);
                 //Update the render
