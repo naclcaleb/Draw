@@ -84,6 +84,7 @@ class Stroke {
 
             render.src = this.render;
             
+            //Draw the render
             this.ctx.drawImage(render, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
            
         }
