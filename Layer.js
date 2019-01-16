@@ -111,6 +111,7 @@ class Layer {
         this.createRender();
         
     }
+    
 
     draw(){
         this.ctx.clearRect(0, 0, this.el.width, this.el.height);
