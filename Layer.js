@@ -8,6 +8,9 @@ function  getMousePos(canvas, evt) {
       clientY: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
     }
 }
+
+
+
 class Layer {
     constructor( width, height ){
         this.active = true;
@@ -32,6 +35,8 @@ class Layer {
         var ctx = this.ctx;
         var active = this.active;
         var that = this;
+
+        
 
         this.createRender();
 
@@ -61,14 +66,12 @@ class Layer {
                 }
 
                 CURRENT_TOOL.currentStroke.createRender();
-
-                var newStroke = CURRENT_TOOL.endStroke(ctx);
-
                 
-
+                var newStroke = CURRENT_TOOL.endStroke(ctx);
+                console.log(that.strokes.length);
                 that.strokes.push(newStroke);
                 //Update the render
-                that.updateRender(newStroke);
+                that.updateRender();
             }
         });
 
@@ -85,40 +88,42 @@ class Layer {
     createRender(){
         this.ctx.globalCompositeOperation = "source-over";
         this.ctx.clearRect(0, 0, this.el.width, this.el.height);
+        
         for (var i = 0;i<this.strokes.length;i++){
+
             this.strokes[i].draw();
         }
 
-        this.render = this.el.toDataURL();
+        this.render = this.ctx.getImageData(0,0, this.el.width, this.el.height);
 
         if (this.erasing){
             this.eraserOn();
         }
     }
 
-    updateRender(stroke){
-        var newImage = new Image();
-        newImage.src = this.render;
-        this.ctx.drawImage(newImage, 0, 0);
-        this.strokes[this.strokes.length-1].draw();
+    updateRender(){
+        this.ctx.globalCompositeOperation = "source-over";
+        this.ctx.clearRect(0, 0, this.el.width, this.el.height);
 
-        this.render = this.el.toDataURL();
+        this.ctx.putImageData(this.render, 0, 0);
+        
+        this.strokes[this.strokes.length-1].draw();
+        
+        
+
+        this.render = this.ctx.getImageData(0,0, this.el.width, this.el.height);
     }
 
     undo(){
         var stroke = this.strokes.pop();
         this.undone.unshift(stroke);
         this.createRender();
-        
     }
-    
 
     draw(){
         this.ctx.clearRect(0, 0, this.el.width, this.el.height);
-
-        var newImage = new Image();
-        newImage.src = this.render;
-        this.ctx.drawImage(newImage, 0, 0);
+        
+        this.ctx.putImageData(this.render, 0, 0);
     }
 
     eraserOn(){

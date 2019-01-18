@@ -65,7 +65,7 @@ var CANVAS_HEIGHT = 600;
 
 var canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
-document.body.addEventListener("mousemove", function(){
+window.setInterval(function(){
     canvas.draw();
 });
 
