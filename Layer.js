@@ -47,6 +47,7 @@ class Layer {
                 CURRENT_TOOL.startStroke(ctx, E);
 
                 if (that.erasing){
+                    CURRENT_TOOL.currentStroke.isEraser = true;
                     CURRENT_TOOL.currentStroke.actions.unshift({
                         func: ctx.setGlobalCompositeOperation,
                         params: ["destination-out"]
@@ -102,7 +103,6 @@ class Layer {
     }
 
     updateRender(){
-        this.ctx.globalCompositeOperation = "source-over";
         this.ctx.clearRect(0, 0, this.el.width, this.el.height);
 
         this.ctx.putImageData(this.render, 0, 0);

@@ -14,6 +14,7 @@ class Stroke {
         this.actions = [];
         this.ctx = context;
         this.render = undefined;
+        this.isEraser = false;
     }
 
     addAction(action){
@@ -45,7 +46,7 @@ class Stroke {
             this.globalAlpha = alpha;
         }
         ctx.setGlobalCompositeOperation = function(operation){
-            this.globalCompositeOperation = 'destination-out';
+            this.globalCompositeOperation = operation;
         }
     
         ctx.setLineCap = function(style){
@@ -70,7 +71,7 @@ class Stroke {
     }
 
     draw(){
-        if (this.render === undefined){
+        if (this.render === undefined || this.isEraser){
             for (var i = 0;i<this.actions.length;i++){
                 this.actions[i].func.apply(this.ctx, this.actions[i].params);
             }
