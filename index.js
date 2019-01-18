@@ -84,7 +84,7 @@ document.getElementById("save").onclick = function(){
     canvas.save();
 };
 
-document.body.addEventListener("wheel", function(e){
+document.getElementById("canvas").addEventListener("wheel", function(e){
     CANVAS_LEFT = parseFloat(canvas.el.style.left.replace("px", ""));
     CANVAS_TOP = parseFloat(canvas.el.style.top.replace("px",""));
     
@@ -93,3 +93,40 @@ document.body.addEventListener("wheel", function(e){
     
 });
 
+
+
+var controls = document.getElementById("controls");
+var isDragging = false;
+
+function getControlsPos(){
+    var left = controls.style.left.replace("px", "");
+    var top = controls.style.top.replace("px", "");
+
+    return {x: left, y: top};
+}
+
+var xoff = 0;
+var yoff = 0;
+
+controls.addEventListener("mousedown", function(e){
+    var coords = getControlsPos();
+
+    if ( e.clientX > coords.x && e.clientX < coords.x + 400 && e.clientY > coords.y && e.clientY < coords.y + 50 ){
+        isDragging = true;
+        xoff = e.clientX - coords.x;
+        yoff = e.clientY - coords.y;
+        console.log("Yes");
+    }
+});
+
+document.body.onmouseup = function(){
+    isDragging = false;
+    
+}
+
+document.body.onmousemove = function(e){
+    if (isDragging){
+        controls.style.left = (e.clientX - xoff) + "px";
+        controls.style.top = (e.clientY - yoff) + "px";
+    }
+}
