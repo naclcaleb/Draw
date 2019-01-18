@@ -108,8 +108,6 @@ class Layer {
         this.ctx.putImageData(this.render, 0, 0);
         
         this.strokes[this.strokes.length-1].draw();
-        
-        
 
         this.render = this.ctx.getImageData(0,0, this.el.width, this.el.height);
     }
