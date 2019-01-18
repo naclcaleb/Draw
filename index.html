@@ -36,14 +36,27 @@
                 top: 10px;
                 background: white;
                 color: rgb(10, 10, 10);
-                padding: 1em;
                 border-radius: 10px;
                 box-shadow: gray 3px 3px 10px;
                 z-index: 1000000;
                 height: 500px;
                 width: 400px;
-                overflow-y: scroll;
-                padding-top: 3em;
+            }
+
+            #container {
+                padding: 1em;
+                overflow-y:scroll;
+                height: 425px;
+            }
+
+            #drag {
+                margin-top: none;
+                font-size: 0; 
+                height: 25px;
+                line-height: 0;
+                width:100%;
+                background: indigo;
+                border-radius: 10px 10px 0px 0px;
             }
 
             #savedImage {
@@ -56,40 +69,42 @@
 
         </div>
         <div id="controls">
-            <label for="brushSize">Brush Size</label><br>
-            <input class="mdl-slider mdl-js-slider" type="range" id="brushSize" value=10 max="1000">
-            <br><br>
-            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="eraser">
-                    <input type="checkbox" id="eraser" class="mdl-checkbox__input" onClick="eraserToggle(this)">
-                    <span class="mdl-checkbox__label">Eraser</span>
-            </label>
+            <div id="drag"></div>
+            <div id="container">
+                <label for="brushSize">Brush Size</label><br>
+                <input class="mdl-slider mdl-js-slider" type="range" id="brushSize" value=10 max="1000">
+                <br><br>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="eraser">
+                        <input type="checkbox" id="eraser" class="mdl-checkbox__input" onClick="eraserToggle(this)">
+                        <span class="mdl-checkbox__label">Eraser</span>
+                </label>
 
-            <br><br>
+                <br><br>
 
-            <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-                <select id="brush" class="mdl-selectfield__select">
-                    <option value="default">Default</option>
-                    <option value="netted">Netted</option>
-                    <option value="calligraphy">Calligraphy</option>
-                    <option value="bubbles">Bubbles</option>
-                    <option value="sketchy">Sketchy</option>
-                </select>
-                <label class="mdl-selectfield__label" for="brush">Brush Type</label>
-            </div><br><br>
+                <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+                    <select id="brush" class="mdl-selectfield__select">
+                        <option value="default">Default</option>
+                        <option value="netted">Netted</option>
+                        <option value="calligraphy">Calligraphy</option>
+                        <option value="bubbles">Bubbles</option>
+                        <option value="sketchy">Sketchy</option>
+                    </select>
+                    <label class="mdl-selectfield__label" for="brush">Brush Type</label>
+                </div><br><br>
 
-            <label for="colorpicker">Color</label><br>
-            <div id="color-picker"></div><br><br>
+                <label for="colorpicker">Color</label><br>
+                <div id="color-picker"></div><br><br>
 
-            <label for="opacity">Opacity</label><br>
-            <input class="mdl-slider mdl-js-slider" type="range" id="opacity" min="0" max="100"><br><br>
+                <label for="opacity">Opacity</label><br>
+                <input class="mdl-slider mdl-js-slider" type="range" id="opacity" min="0" max="100"><br><br>
 
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <label class="mdl-textfield__label">File Name: </label>
-                <input class="mdl-textfield__input" type="text" id="filename" value="Untitled">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <label class="mdl-textfield__label">File Name: </label>
+                    <input class="mdl-textfield__input" type="text" id="filename" value="Untitled">
+                </div>
+                <br><br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="save">Save Drawing</button>
             </div>
-            <br><br>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="save">Save Drawing</button>
-
         </div>
 
         <div id="savedImage"></div>

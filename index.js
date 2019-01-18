@@ -111,7 +111,7 @@ var yoff = 0;
 controls.addEventListener("mousedown", function(e){
     var coords = getControlsPos();
 
-    if ( e.clientX > coords.x && e.clientX < coords.x + 400 && e.clientY > coords.y && e.clientY < coords.y + 50 ){
+    if ( e.clientX > coords.x && e.clientX < coords.x + 400 && e.clientY > coords.y && e.clientY < coords.y + 25 ){
         isDragging = true;
         xoff = e.clientX - coords.x;
         yoff = e.clientY - coords.y;
