@@ -23,12 +23,14 @@ var DEFAULT_BRUSH = new Brush(function(ctx, e){
                 
                 
                 radgrad.addColorStop(0, colorToString(COLOR));
-                var tmpColor = COLOR;
-                tmpColor.alpha = 0.5;
-                radgrad.addColorStop(0.5, colorToString(tmpColor));
-                tmpColor.alpha = 0;
-                radgrad.addColorStop(1, colorToString(tmpColor));
-                COLOR.alpha = 1;
+
+                var pastColorAlpha = COLOR.alpha + 1;
+                
+                COLOR.alpha /= 2;
+                radgrad.addColorStop(0.5, colorToString(COLOR));
+                COLOR.alpha = 0;
+                radgrad.addColorStop(1, colorToString(COLOR));
+                COLOR.alpha = pastColorAlpha - 1;
                 var action = {
                     func: ctx.setFillStyle,
                     params: [radgrad]

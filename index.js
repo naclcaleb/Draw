@@ -55,7 +55,7 @@ var COLOR = {
     red: 255,
     green: 0,
     blue: 0,
-    alpha: 0.3
+    alpha: 1
 };
 
 var ACTIVE_LAYER = 0;
