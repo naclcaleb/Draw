@@ -195,6 +195,59 @@ var BUBBLES = new Brush(function(ctx, e){
     this.currentStroke.addActions(actions);
 });
 
+var SOLID = new Brush(function(ctx, e){
+    var pmouseX = this.lastPoint[0],
+                pmouseY = this.lastPoint[1],
+                mouseX = e.clientX,
+                mouseY = e.clientY;
+            
+            var d = dist(pmouseX, pmouseY, mouseX, mouseY);
+            var angle = angleBetween(pmouseX, pmouseY, mouseX, mouseY);
+            var lastX = pmouseX;
+            var lastY = pmouseY;
+
+            const setFillStyle = [
+                {
+                    func: ctx.setFillStyle,
+                    params: [colorToString(COLOR)]
+                },
+                {
+                    func: ctx.setGlobalAlpha,
+                    params: [COLOR.alpha]
+                }
+            ];
+
+            this.currentStroke.addActions(setFillStyle);
+            
+            for (var i = 0;i<d;i+=BRUSH_SIZE/4){
+                
+                var x = lastX + (i * Math.sin(angle));
+                var y = lastY + (i * Math.cos(angle));
+
+                //Draw an ellipse
+                
+                 let actions = [
+                     {
+                        func: ctx.beginPath,
+                        params: []
+                     },
+                     {
+                        func: ctx.arc, 
+                        params: [x, y, BRUSH_SIZE, 0, 2 * Math.PI]
+                    },
+                    {
+                        func: ctx.fill,
+                        params: []
+                    }
+                ];
+
+
+                this.currentStroke.addActions(actions);
+            }
+
+               
+});
+
 var callig_instance_img = new Image();
 callig_instance_img.src = "calligraphy.png";
 var CALLIGRAPHY_BRUSH = new ImageBrush(callig_instance_img);

@@ -5,7 +5,8 @@ var BRUSHES = {
     "netted": NETTED,
     "bubbles": BUBBLES,
     "sketchy": SKETCHY,
-    "calligraphy": CALLIGRAPHY_BRUSH
+    "calligraphy": CALLIGRAPHY_BRUSH,
+    "solid": SOLID
 };
 
 var FILENAME = document.getElementById("filename").value;
@@ -14,6 +15,7 @@ var FILENAME = document.getElementById("filename").value;
 type.addEventListener("change", function(e){
     
     CURRENT_TOOL = BRUSHES[type.value];
+    console.log(type.value);
     
 });
 
