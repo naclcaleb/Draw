@@ -50,6 +50,28 @@ var o = document.getElementById("opacity");
 o.addEventListener("change", function(){
      COLOR.alpha = o.value/100;
 });
+
+
+//Load Brushes
+function loadBrushes(){
+    document.getElementById("brush").innerHTML = "";
+
+    for (var i in BRUSHES){
+        var newEl = document.createElement("option");
+        newEl.value = i;
+        var str = i;
+        var upCase = str.charAt(0).toUpperCase();
+        str = upCase + str.substr(1, str.length);
+
+        newEl.textContent = str;
+
+        document.getElementById("brush").appendChild(newEl);
+    }
+}
+
+loadBrushes();
+
+
 //Globals
 var CURRENT_TOOL = DEFAULT_BRUSH;
 var BRUSH_SIZE = 10;
