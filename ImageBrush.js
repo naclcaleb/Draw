@@ -1,13 +1,21 @@
+//The ImageBrush class
 class ImageBrush {
     constructor(img) {
+        //Keep track of the previous mouse point
         this.lastPoint = [];
+
+        //Define the current stroke
         this.currentStroke;
+
+        //The brush is not on
         this.on = false;
+
+        //Get the image
         this.img = img;
-        //this.img.crossOrigin = 'Anonymous';
     }
 
     prepareContext(ctx) {
+        //Define some setter functions
         ctx.setFillStyle = function(style) {
             ctx.fillStyle = style;
         };
@@ -37,42 +45,59 @@ class ImageBrush {
     }
 
     startStroke(ctx, e) {
+        //Create a new stroke
         this.currentStroke = new Stroke(ctx);
+
+        //Prepare the context
         this.prepareContext(ctx);
+
+        //Define the last mouse point
         this.lastPoint = [e.clientX, e.clientY];
+
+        //Turn the brush on
         this.on = true;
+
+        //Continue the stroke
         this.continueStroke(ctx, e);
     }
 
     endStroke(ctx, e) {
+        //Turn the brush off
         this.on = false;
+
+        //Return the stroke
         return this.currentStroke;
     }
 
     continueStroke(ctx, e) {
+        //If the brush is on...
         if (this.on) {
+            //Define mouse vars
             var pmouseX = this.lastPoint[0],
                 pmouseY = this.lastPoint[1],
                 mouseX = e.clientX,
                 mouseY = e.clientY;
 
+            //Get the distance between mouse and pmouse, and the angle between the pmouse-mouse line and the x-axis
             var d = dist(pmouseX, pmouseY, mouseX, mouseY);
             var angle = angleBetween(pmouseX, pmouseY, mouseX, mouseY);
-            var lastX = pmouseX;
-            var lastY = pmouseY;
+            
 
             for (var i = 0; i < d; i++) {
-                var x = lastX + i * Math.sin(angle);
-                var y = lastY + i * Math.cos(angle);
-
+                var x = pmouseX + i * Math.sin(angle);
+                var y = pmouseY + i * Math.cos(angle);
+                
+                //Draw the image
                 var action = {
                     func: ctx.drawImage,
                     params: [this.img, x, y, BRUSH_SIZE, BRUSH_SIZE]
                 };
 
+                //Add the action to the current stroke
                 this.currentStroke.addAction(action);
             }
 
+            //Reset the last point
             this.lastPoint = [e.clientX, e.clientY];
         }
     }

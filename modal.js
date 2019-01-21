@@ -1,9 +1,14 @@
+//Define the Modal class
 class Modal {
     constructor(title, body) {
+        //Define our title and body vars
         this.title = title;
         this.body = body;
+
+        //Create a unique modal id
         this.id = new Date().getTime();
         
+        //Create an element and give it an HTML template
         this.el = document.createElement("div");
         this.el.innerHTML = `
             <div class="mdl-card mdl-shadow--2dp">
@@ -22,6 +27,7 @@ class Modal {
             </div>
         `;
 
+        //Define our styles
         var styles = {
             position: "absolute",
             width: "100%",
@@ -37,6 +43,7 @@ class Modal {
             alignItems: "center"
         };
 
+        //Loop through and apply our styles
         for (var i in styles){
             this.el.style[i] = styles[i];
         }
@@ -46,10 +53,12 @@ class Modal {
     }
 
     show() {
+        //Bring it to the top
         this.el.style.top = "0px";
     }
 
     hide() {
+        //Hide it at the bottom
         this.el.style.top = window.innerHeight * 2 + "px";
     }
 }
