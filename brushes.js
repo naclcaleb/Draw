@@ -230,6 +230,7 @@ var SOLID = new Brush(function(ctx, e) {
         //Draw an ellipse
 
         let actions = [
+            
             {
                 func: ctx.beginPath,
                 params: []
