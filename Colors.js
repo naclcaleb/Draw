@@ -1,4 +1,4 @@
-function colorToString(color){
+function colorToString(color) {
     var str = "rgba(";
     str += color.red + ", ";
     str += color.green + ", ";

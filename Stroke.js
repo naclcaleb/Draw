@@ -1,9 +1,5 @@
-
-    
-   
-
 class Stroke {
-    constructor(context){
+    constructor(context) {
         /*
         An action looks like:
         {
@@ -17,66 +13,63 @@ class Stroke {
         this.isEraser = false;
     }
 
-    addAction(action){
+    addAction(action) {
         this.actions.push(action);
     }
 
-    addActions(actions){
-        for (var i = 0;i<actions.length;i++){
+    addActions(actions) {
+        for (var i = 0; i < actions.length; i++) {
             this.addAction(actions[i]);
         }
     }
 
-    createRender(){
+    createRender() {
         var canvas = document.createElement("canvas");
         canvas.width = CANVAS_WIDTH;
         canvas.height = CANVAS_HEIGHT;
         var ctx = canvas.getContext("2d");
 
-        ctx.setFillStyle = function(style){
+        ctx.setFillStyle = function(style) {
             this.fillStyle = style;
-        }
-        ctx.setStrokeStyle = function(style){
+        };
+        ctx.setStrokeStyle = function(style) {
             this.strokeStyle = style;
-        }
-        ctx.setLineWidth = function(width){
+        };
+        ctx.setLineWidth = function(width) {
             this.lineWidth = width;
-        }
-        ctx.setGlobalAlpha = function(alpha){
+        };
+        ctx.setGlobalAlpha = function(alpha) {
             this.globalAlpha = alpha;
-        }
-        ctx.setGlobalCompositeOperation = function(operation){
+        };
+        ctx.setGlobalCompositeOperation = function(operation) {
             this.globalCompositeOperation = operation;
-        }
-    
-        ctx.setLineCap = function(style){
+        };
+
+        ctx.setLineCap = function(style) {
             this.lineCap = style;
-        }
-    
-        ctx.setLineJoin = function(style){
+        };
+
+        ctx.setLineJoin = function(style) {
             this.lineJoin = style;
-        }
-        
+        };
+
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
-        
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (var i = 0;i<this.actions.length;i++){
+        for (var i = 0; i < this.actions.length; i++) {
             this.actions[i].func.apply(ctx, this.actions[i].params);
         }
-        
-        this.render = canvas;
 
+        this.render = canvas;
     }
 
-    draw(){
-        if (this.render === undefined || this.isEraser){
-            for (var i = 0;i<this.actions.length;i++){
+    draw() {
+        if (this.render === undefined || this.isEraser) {
+            for (var i = 0; i < this.actions.length; i++) {
                 this.actions[i].func.apply(this.ctx, this.actions[i].params);
             }
-        }
-        else {
+        } else {
             //Draw the render
             this.ctx.drawImage(this.render, 0, 0);
         }
