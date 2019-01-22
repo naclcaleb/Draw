@@ -162,25 +162,29 @@ class Layer {
     }
 
     undo() {
-        //Get the last stroke
-        var stroke = this.strokes.pop();
+		if(this.strokes.length > 0){
+			//Get the last stroke
+			var stroke = this.strokes.pop();
 
-        //Add it to our "undone" list
-        this.undone.unshift(stroke);
+			//Add it to our "undone" list
+			this.undone.unshift(stroke);
 
-        //Recreate the render
-        this.createRender();
+			//Recreate the render
+			this.createRender();
+	    }
     }
 	
     redo() {
-        //Get the last undone stroke
-        var stroke = this.undone.shift();
+		if(this.undos.length > 0){
+			//Get the last undone stroke
+			var stroke = this.undone.shift();
 
-        //Add it back to our drawing
-        this.strokes.push(stroke);
+			//Add it back to our drawing
+			this.strokes.push(stroke);
 
-        //Rerender the drawing
-        this.createRender();
+			//Rerender the drawing
+			this.createRender();
+		}
     }
 
     draw() {
