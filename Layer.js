@@ -180,7 +180,7 @@ class Layer {
         this.strokes.unshift(stroke);
 
         //Rerender the drawing
-        this.updateRender();
+        this.createRender();
     }
 
     draw() {
