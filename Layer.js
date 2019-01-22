@@ -171,6 +171,17 @@ class Layer {
         //Recreate the render
         this.createRender();
     }
+	
+    redo() {
+        //Get the last undone stroke
+        var stroke = this.undone.shift();
+
+        //Add it back to our drawing
+        this.strokes.unshift(stroke);
+
+        //Rerender the drawing
+        this.createRender();
+    }
 
     draw() {
         //Clear the canvas (Possibly unnecessary)
