@@ -177,7 +177,7 @@ class Layer {
         var stroke = this.undone.shift();
 
         //Add it back to our drawing
-        this.stroke.unshift(stroke);
+        this.strokes.unshift(stroke);
 
         //Rerender the drawing
         this.updateRender();
