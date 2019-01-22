@@ -172,7 +172,7 @@ class Layer {
         this.createRender();
     }
 	
-	redo() {
+    redo() {
         //Get the last undone stroke
         var stroke = this.undone.shift();
 
