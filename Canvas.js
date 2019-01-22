@@ -47,6 +47,17 @@ class Canvas {
                 that.draw();
             }
         });
+        
+        //Listen for Ctrl+Y to redo
+        document.addEventListener("keydown", function(e) {
+            if ( e.key === "y" && e.ctrlKey ) {
+                //Call the active layer's undo function
+                that.layers[that.activeLayer].redo();
+
+                //Redraw
+                that.draw();
+            }
+        });
     }
 
     zoom(n) {
