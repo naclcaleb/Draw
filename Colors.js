@@ -8,3 +8,4 @@ function colorToString(color) {
 
     return str;
 }
+
