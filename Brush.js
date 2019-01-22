@@ -105,6 +105,7 @@ class Brush {
 
             //Update the previous mouse point
             this.lastPoint = [e.clientX, e.clientY];
+            
         }
     }
 }
