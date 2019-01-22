@@ -175,7 +175,7 @@ class Layer {
     }
 	
     redo() {
-		if(this.undos.length > 0){
+		if(this.undone.length > 0){
 			//Get the last undone stroke
 			var stroke = this.undone.shift();
 
