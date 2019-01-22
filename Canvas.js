@@ -10,10 +10,13 @@ class Canvas {
         this.height = height;
 
         //Keep track of all the canvas' layers
-        this.layers = [new Layer(width, height)];
+        this.layers = [new Layer(width, height), new Layer(width, height)];
 
         //Define the active layer
         this.activeLayer = ACTIVE_LAYER || 0;
+
+        //Tell the active layer that it's active
+        this.layers[this.activeLayer].active = true;
 
         //Create an element and give it an id
         this.el = document.createElement("div");
@@ -135,7 +138,7 @@ class Canvas {
             this.layers[i].createRender();
 
             //Put the image data from the render
-            context.putImageData(this.layers[i].render, 0, 0);
+            context.drawImage(this.layers[i].render, 0, 0);
         }
 
         //Automatically download it

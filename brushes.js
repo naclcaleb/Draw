@@ -294,7 +294,7 @@ var SOLID = new Brush(function(ctx, e) {
             },
             {
                 func: ctx.arc,
-                params: [x, y, BRUSH_SIZE, 0, 2 * Math.PI]
+                params: [x, y, BRUSH_SIZE/2, 0, 2 * Math.PI]
             },
             {
                 func: ctx.fill,
@@ -319,4 +319,4 @@ var callig_instance_img = new Image();
 //Get the calligraphy image
 callig_instance_img.src = "calligraphy.png";
 //Create a new imagebrush
-var CALLIGRAPHY_BRUSH = new ImageBrush(callig_instance_img);
+var CALLIGRAPHY_BRUSH = new ImageBrush(callig_instance_img, true);

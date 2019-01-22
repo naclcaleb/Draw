@@ -1,6 +1,6 @@
 //The ImageBrush class
 class ImageBrush {
-    constructor(img) {
+    constructor(img, smoothing) {
         //Keep track of the previous mouse point
         this.lastPoint = [];
 
@@ -9,6 +9,9 @@ class ImageBrush {
 
         //The brush is not on
         this.on = false;
+
+        //Smoothing
+        this.smoothing = smoothing;
 
         //Get the image
         this.img = img;
@@ -78,23 +81,31 @@ class ImageBrush {
                 mouseX = e.clientX,
                 mouseY = e.clientY;
 
-            //Get the distance between mouse and pmouse, and the angle between the pmouse-mouse line and the x-axis
-            var d = dist(pmouseX, pmouseY, mouseX, mouseY);
-            var angle = angleBetween(pmouseX, pmouseY, mouseX, mouseY);
-            
-
-            for (var i = 0; i < d; i++) {
-                var x = pmouseX + i * Math.sin(angle);
-                var y = pmouseY + i * Math.cos(angle);
+            //If smoothing is on, make the smooth curve
+            if (this.smoothing){
+                //Get the distance between mouse and pmouse, and the angle between the pmouse-mouse line and the x-axis
+                var d = dist(pmouseX, pmouseY, mouseX, mouseY);
+                var angle = angleBetween(pmouseX, pmouseY, mouseX, mouseY);
                 
-                //Draw the image
-                var action = {
-                    func: ctx.drawImage,
-                    params: [this.img, x, y, BRUSH_SIZE, BRUSH_SIZE]
-                };
 
-                //Add the action to the current stroke
-                this.currentStroke.addAction(action);
+                for (var i = 0; i < d; i++) {
+                    var x = pmouseX + i * Math.sin(angle);
+                    var y = pmouseY + i * Math.cos(angle);
+                    
+                    //Draw the image
+                    var action = {
+                        func: ctx.drawImage,
+                        params: [this.img, x, y, BRUSH_SIZE, BRUSH_SIZE]
+                    };
+
+                    //Add the action to the current stroke
+                    this.currentStroke.addAction(action);
+                }
+            } else {
+                this.currentStroke.addAction({
+                    func: ctx.drawImage,
+                    params: [this.img, mouseX, mouseY, BRUSH_SIZE, BRUSH_SIZE]
+                });
             }
 
             //Reset the last point

@@ -251,13 +251,21 @@ document.getElementById("save").onclick = function() {
 
 //Zoom on mousewheel
 document.getElementById("canvas").addEventListener("wheel", function(e) {
+    e.preventDefault();
+
     CANVAS_LEFT = parseFloat(canvas.el.style.left.replace("px", ""));
     CANVAS_TOP = parseFloat(canvas.el.style.top.replace("px", ""));
 
-    e.preventDefault();
 
     //This is the most important line
     canvas.zoom(e.deltaY);
+});
+
+//Keep the rest of the screen from scrolling
+document.body.addEventListener("wheel", function(e){
+    if (e.target === document.body){
+        e.preventDefault();
+    }
 });
 
 //Grab our controls
@@ -313,3 +321,27 @@ document.body.onmousemove = function(e) {
         controls.style.top = e.clientY - yoff + "px";
     }
 };
+
+/****************
+ * 
+ * Layer Editor
+ * 
+ ****************/
+
+//Define the layer editor and add it to our modals
+var layerEditor = new Modal("Edit Layers", "<div id='layer-editor'></div>");
+modals.push(layerEditor);
+
+//Opens the layer editor
+function openLayerEditor(){
+    loadLayers();
+    layerEditor.show();
+}
+
+//Loads the layers in the canvas to the layer editor
+function loadLayers(){
+    //For each layer in the canvas...
+    for (var i = 0;i<canvas.layers.length;i++){
+        
+    }
+}

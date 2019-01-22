@@ -1,0 +1,2 @@
+Mouse Released -> Stroke Rendered -> Stroke added -> Layer updates
+                                                        -> 
