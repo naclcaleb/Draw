@@ -37,25 +37,22 @@ class Canvas {
             this.el.appendChild(this.layers[i].el);
         }
 
-        //Listen for Ctrl+Z to undo
+        //Listen for Ctrl+Z to undo and Ctrl+Y to redo
         document.addEventListener("keydown", function(e) {
-            if ( e.key === "z" && e.ctrlKey ) {
-                //Call the active layer's undo function
-                that.layers[that.activeLayer].undo();
+            if( e.ctrlKey ){
+                if ( e.key === "z" ) {
+                    //Call the active layer's undo function
+                    that.layers[that.activeLayer].undo();
 
-                //Redraw
-                that.draw();
-            }
-        });
-        
-        //Listen for Ctrl+Y to redo
-        document.addEventListener("keydown", function(e) {
-            if ( e.key === "y" && e.ctrlKey ) {
-                //Call the active layer's undo function
-                that.layers[that.activeLayer].redo();
+                    //Redraw
+                    that.draw();
+                }else if( e.key === "y" ){
+                    //Call the active layer's redo function
+                    that.layers[that.activeLayer].redo();
 
-                //Redraw
-                that.draw();
+                    //Redraw
+                    that.draw();
+                }
             }
         });
     }
