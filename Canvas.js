@@ -45,13 +45,25 @@ class Canvas {
             if( e.ctrlKey ){
                 if ( e.key === "z" ) {
                     //Call the active layer's undo function
-                    that.layers[that.activeLayer].undo();
+                    that.layers[ACTIVE_LAYER].undo();
+
+                    //Notify the user
+                    NOTIFIER.MaterialSnackbar.showSnackbar({
+                        message: "Undo",
+                        timeout: 1000
+                    });
 
                     //Redraw
                     that.draw();
                 }else if( e.key === "y" ){
                     //Call the active layer's redo function
-                    that.layers[that.activeLayer].redo();
+                    that.layers[ACTIVE_LAYER].redo();
+
+                    //Notify the user
+                    NOTIFIER.MaterialSnackbar.showSnackbar({
+                        message: "Redo",
+                        timeout: 1000
+                    });
 
                     //Redraw
                     that.draw();
@@ -161,5 +173,27 @@ class Canvas {
 
         //Remove the link
         link.remove();
+    }
+
+    setActiveLayer(layer){
+        ACTIVE_LAYER = layer;
+        for (var i = 0;i<this.layers.length;i++){
+            if (i === layer) {
+                this.layers[i].active = true;
+            }
+            else {
+                this.layers[i].active = false;
+            }
+        }
+    }
+
+    addLayer(){
+        this.layers.push(new Layer(this._width, this._height));
+
+        this.el.appendChild(this.layers[this.layers.length - 1].el);
+        
+        this.zoom(0);
+
+        this.setActiveLayer(this.layers.length - 1);
     }
 }
