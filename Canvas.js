@@ -32,6 +32,7 @@ class Canvas {
         //Add the element to the viewport
         document.getElementById("viewport").appendChild(this.el);
 
+        
         //A little trick I picked up...
         var that = this;
 
