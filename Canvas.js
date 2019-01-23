@@ -32,7 +32,7 @@ class Canvas {
         //Add the element to the viewport
         document.getElementById("viewport").appendChild(this.el);
 
-        
+
         //A little trick I picked up...
         var that = this;
 
@@ -48,23 +48,11 @@ class Canvas {
                     //Call the active layer's undo function
                     that.layers[ACTIVE_LAYER].undo();
 
-                    //Notify the user
-                    NOTIFIER.MaterialSnackbar.showSnackbar({
-                        message: "Undo",
-                        timeout: 1000
-                    });
-
                     //Redraw
                     that.draw();
                 }else if( e.key === "y" ){
                     //Call the active layer's redo function
                     that.layers[ACTIVE_LAYER].redo();
-
-                    //Notify the user
-                    NOTIFIER.MaterialSnackbar.showSnackbar({
-                        message: "Redo",
-                        timeout: 1000
-                    });
 
                     //Redraw
                     that.draw();

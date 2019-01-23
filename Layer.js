@@ -187,7 +187,13 @@ class Layer {
 			this.undone.unshift(stroke);
 
 			//Recreate the render
-			this.createRender();
+            this.createRender();
+            
+            //Notify the user
+            NOTIFIER.MaterialSnackbar.showSnackbar({
+                message: "Undo",
+                timeout: 1000
+            });
 	    }
     }
 	
@@ -200,7 +206,13 @@ class Layer {
 			this.strokes.push(stroke);
 
 			//Rerender the drawing
-			this.createRender();
+            this.createRender();
+            
+            //Notify the user
+            NOTIFIER.MaterialSnackbar.showSnackbar({
+                message: "Redo",
+                timeout: 1000
+            });
 		}
     }
 
