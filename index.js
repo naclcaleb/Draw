@@ -344,53 +344,73 @@ function openLayerEditor(){
 
 //Loads the layers in the canvas to the layer editor
 function loadLayers(){
+    //Clear the layers
     document.getElementById("layer-editor").innerHTML = "";
+    
     //For each layer in the canvas...
     for (var i = 0;i<canvas.layers.length;i++){
+        //Make a new "cloned" canvas
         let c = cloneCanvas(canvas.layers[i].render);
+        
+        //Set some styles
         c.style.width = "100px";
         c.style.height = "100px";
         c.style.margin = "10px";
         
         c.className = "mdl-cell mdl-cell--3-col";
-
-        let _i = i;
-        c.id = _i;
-
+        
+        //Highlight the active layer
         if (i === ACTIVE_LAYER){
             c.style.border = "solid 3px blue";
         }
+        
+        //Create a copy of i
+        let _i = i;
 
+        
+        //Listen for click
         c.addEventListener("click", function(e){
+            //Set the active layer
             canvas.setActiveLayer(_i);
+            
+            //Reload the layers
             loadLayers();
         });
         
+        //Append the layer
         document.getElementById("layer-editor").appendChild(c);
     }
 
+    //Create the add layer button
     var addLayer = document.createElement("div");
-
+    
+    //Some styling
     addLayer.style.width = "100px";
     addLayer.style.height = "100px";
     addLayer.style.backgroundColor = "lightgray";
     addLayer.style.margin = "10px";
-    
-    addLayer.id = "addLayer";
 
     addLayer.style.display = "flex";
     addLayer.style.alignItems = "center";
     addLayer.style.justifyContent = "center";
-
+    
+    //InnerHTML
     addLayer.innerHTML = "<i class='material-icons'>add</i>";
 
+    //ID and Classname
+    addLayer.id = "addLayer";
     addLayer.className = "mdl-cell mdl-cell--3-col";
+    
+    //Set the font size
     addLayer.style.fontSize = "30px";
     
+    //Add and reload the layers on click
     addLayer.addEventListener("click", function(){
         canvas.addLayer();
         loadLayers();
     });
-
+    
+    
+    //Append the button
     document.getElementById("layer-editor").appendChild(addLayer);
 }
