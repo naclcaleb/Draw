@@ -331,6 +331,7 @@ var NOTIFIER = document.querySelector('.mdl-js-snackbar');
  * 
  ****************/
 
+ 
 //Define the layer editor and add it to our modals
 var layerEditor = new Modal("Edit Layers", "<div id='layer-editor' class='mdl-grid'></div>");
 modals.push(layerEditor);

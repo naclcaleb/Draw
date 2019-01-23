@@ -70,7 +70,6 @@ class Layer {
 
         //Create the layer render (basically an image of everything on the layer canvas, in this case nothing)
         this.createRender();
-
         
 
         //On mouse down...
