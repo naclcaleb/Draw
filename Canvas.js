@@ -12,6 +12,7 @@ class Canvas {
         //Keep track of all the canvas' layers
         this.layers = [new Layer(width, height), new Layer(width, height)];
 
+        
         //Define the active layer
         this.activeLayer = ACTIVE_LAYER || 0;
 
