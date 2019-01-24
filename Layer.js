@@ -16,6 +16,20 @@ function cloneCanvas(oldCanvas) {
     return newCanvas;
 }
 
+function notify(message) {
+    var n = document.getElementById("snackbar");
+    n.innerHTML = message;
+    
+    n.classList.remove("show");
+
+    n.classList.add("show");
+
+    setTimeout(function(){
+        n.classList.remove("show");
+    }, 1000);
+    
+}
+
 
 //Global function for getting the mouse position relative to the canvas
 function getMousePos(canvas, evt) {
@@ -190,10 +204,7 @@ class Layer {
             this.createRender();
             
             //Notify the user
-            NOTIFIER.MaterialSnackbar.showSnackbar({
-                message: "Undo",
-                timeout: 1000
-            });
+            notify("Undo");
 	    }
     }
 	
@@ -209,10 +220,7 @@ class Layer {
             this.createRender();
             
             //Notify the user
-            NOTIFIER.MaterialSnackbar.showSnackbar({
-                message: "Redo",
-                timeout: 1000
-            });
+            notify("Redo");
 		}
     }
 
